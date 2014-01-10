@@ -1,0 +1,89 @@
+<html>
+	<head>
+	</head>
+	<body>
+    <script src="libs/knockout-2.3.0.min.js" type="text/javascript"></script>
+    <script src="src/knockout.lock.js" type="text/javascript"></script>
+
+		<style>
+		.container
+		{
+			margin: auto;
+			text-align: center;
+			border: 1px dashed #000;
+			width: 400px;
+		}
+		
+          .element-container
+		  {
+			display: block;
+		  }
+		  
+		  .element-container label
+		  {
+			display: inline-block;
+			width: 100px;
+		  }
+		  
+		  .element-container input
+		  {
+		  	display: inline-block;
+		  }
+        </style>
+
+		<h2>Simple Example</h2>
+		<form id="some-form-element" class="container" data-bind="lock: ShouldLockForm">
+			<h3>Some Dummy Form Data</h3>
+			<div class="element-container">
+				<label for="form-name">name</label>
+				<input type="text" id="form-name" />
+			</div>
+			<div class="element-container">
+				<label for="form-age">age</label>
+				<input type="text" id="form-age" />
+			</div>
+			<div class="element-container">
+				<label for="form-blah">blah</label>
+				<input type="text" id="form-blah" />
+			</div>
+		</form>
+		<button id="lock-form" data-bind="click: function(){ ShouldLockForm(true); }">Lock Form</button>
+		<button id="unlock-form" data-bind="click: function(){ ShouldLockForm(false); }">Unlock Form</button>
+		
+		<h2>Callback Example</h2>
+		<form id="callback-some-form-element" class="container" data-bind="lock: { shouldLock: ShouldLockCallbackForm, onLocking: CustomLockingLogic, onUnlocking: CustomUnlockingLogic }">
+			<h3>Uses callbacks to add custom data-* attributes when something is locked or unlocked</h3>
+			<div class="element-container">
+				<label for="callback-form-name">name</label>
+				<input type="text" id="callback-form-name" />
+			</div>
+			<div class="element-container">
+				<label for="callback-form-age">age</label>
+				<input type="text" id="callback-form-age" />
+			</div>
+			<div class="element-container">
+				<label for="callback-form-blah">blah</label>
+				<input type="text" id="callback-form-blah" />
+			</div>
+		</form>
+		<button id="callback-lock-form" data-bind="click: function(){ ShouldLockCallbackForm(true); }">Lock Form</button>
+		<button id="callback-unlock-form" data-bind="click: function(){ ShouldLockCallbackForm(false); }">Unlock Form</button>
+		
+        <script>
+
+			function DummyViewModel()
+			{
+				this.ShouldLockForm = ko.observable(false);
+				this.ShouldLockCallbackForm = ko.observable(false);
+				this.CustomLockingLogic = function(element) {
+					element.setAttribute("data-locked", "true");
+				};
+				this.CustomUnlockingLogic = function(element) {
+					element.setAttribute("data-locked", "false");
+				};
+			}
+
+            ko.applyBindings(new DummyViewModel());
+        </script>
+	</body>
+</html>
