@@ -20,6 +20,8 @@
 		}
 	};
 		
+	knockout.lock = lockContainer;
+	knockout.unlock = unlockContainer;
 	knockout.bindingHandlers.lock = {
 		update: function(element, valueAccessor, allBindingsAccessor, viewModel) {
 			var allBindings = allBindingsAccessor();
@@ -38,6 +40,5 @@
 
 			lock ? lockContainer(element, lockingCallback) : unlockContainer(element, unlockingCallback);
 		}
-	};
-	
+	};	
 })(typeof exports === 'undefined' ? this["ko"] : require("knockout"));

@@ -31,5 +31,12 @@ The available advanced options for this binding are:
 * **onLocking** - The callback for each element which will be locked
 * **onUnlocking** - The callback for each element which will be unlocked
 
+There are also now some manual invocation methods, so you can manually call:
+
+* knockout.lock(containerElement, callback);
+* knockout.unlock(containerElement, callback);
+
+This should not be used in most cases but allows progmatic interaction with the bindings.
+
 Here is an example of what it does and how to use it.
 [View Example](https://rawgithub.com/grofit/knockout.lock/master/example.html)
